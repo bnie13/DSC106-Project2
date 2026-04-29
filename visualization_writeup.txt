@@ -1,0 +1,317 @@
+================================================================================
+DSC 106 — Data Visualization Ethics
+Proposition: "Limited access to abortion providers leads to lower abortion rates."
+================================================================================
+
+
+================================================================================
+VISUALIZATION 1: SUPPORTS THE PROPOSITION
+Title: "States With Fewer Providers Show Lower Abortion Rates"
+================================================================================
+
+This is a scatterplot where X = percent of counties without an abortion clinic
+(2020), Y = abortions per 1,000 women aged 15–44 (2020), and a red OLS
+regression line ties the relationship together visually.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 1 — Rate Measured "By State of Occurrence," Not "By Residence"
+Score: -2.0  (fully deceptive)
+--------------------------------------------------------------------------------
+What: The abortion rate plotted on the Y-axis counts abortions that physically
+occurred inside each state — not abortions obtained by that state's residents.
+That is a huge distinction. In states with very few clinics, many residents
+drive or fly to a neighboring state for care. Their abortions then get counted
+in the neighboring state's occurrence total, not their home state's. So a state
+like Mississippi looks like it has a very low abortion rate on this chart — and
+it does, by occurrence — but a meaningful fraction of that low number reflects
+women who simply had to travel, not women who couldn't or didn't get abortions.
+The "by residence" rate (which follows the woman, not the clinic) would be the
+more honest measure of actual abortion incidence. I deliberately chose
+occurrence because it makes the correlation appear cleaner and more dramatic.
+The alternative — plotting by-residence rate — was tried and produced a similar
+negative correlation (r ≈ -0.58 vs. r ≈ -0.52 for occurrence), but the
+by-occurrence version produces more extreme low-end values for restricted states,
+which makes the scatterplot look more convincing.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 2 — Truncated Y-Axis (starts at 2, not 0)
+Score: -1.5  (mostly deceptive)
+--------------------------------------------------------------------------------
+What: The Y-axis floor is set to 2 rather than 0. This exaggerates the
+apparent steepness of the regression line without altering a single data point.
+Visually, the distance between the highest-rate states (~29) and lowest-rate
+states (~3) looks much larger proportionally because the bottom of the axis
+cuts away empty space — but it also cuts away the visual anchor at zero that
+would remind the viewer how moderate these differences actually are. A Y-axis
+starting at 0 would make the regression line look noticeably flatter and the
+differences between states less dramatic. The APA and most data journalism
+style guides recommend starting quantitative axes at zero; departing from that
+default here is a deliberate choice to amplify the apparent effect. The one
+fig-leaf justification is that no state has a rate below 3, so "the axis starts
+near the data," but that framing is exactly the kind of rationalization that
+makes this technique easy to deploy without feeling dishonest.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 3 — Red Color Gradient Encoding Restriction Level
+Score: -1.0  (moderately deceptive)
+--------------------------------------------------------------------------------
+What: Each dot is colored on a white-to-dark-red gradient, where darker red
+means a higher percentage of counties lack a clinic. This double-encodes the
+X-axis information (you can read restriction level twice: once from position,
+once from color). More importantly, it does so using red — a color with strong
+negative cultural connotations. Darker red dots cluster in the lower-right
+quadrant (high restriction, low abortion rate), which trains the eye to
+associate that corner of the chart with alarm. An honest alternative would have
+been a neutral gradient (gray to blue, or a colorblind-safe sequential palette
+with no emotional charge). I chose red specifically because it makes the
+restricted-access states feel more salient and threatening, which nudges viewers
+toward a "something is wrong here" interpretation without requiring any explicit
+claim to that effect.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 4 — Selective State Annotations
+Score: -1.0  (moderately deceptive)
+--------------------------------------------------------------------------------
+What: Six states are labeled by name: Mississippi, Arkansas, and Wyoming (very
+high restriction, low rate) and New York, New Jersey, and California (low
+restriction, high rate). These are the states that sit closest to the extreme
+corners of the trend, making the regression line look nearly inevitable. States
+that don't follow the pattern — Nevada and Florida, for example, have fairly
+high restriction but moderate-to-high rates — are left as anonymous dots in the
+cluster. Selective annotation is one of the quietest forms of cherry-picking in
+visualization: you're technically showing all the data, but you're directing the
+viewer's attention only to the examples that confirm your argument. An honest
+alternative would have been to label states randomly, label all 50, or label
+specifically the outliers that challenge the trend. I did the opposite.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 5 — Removing Washington D.C. as an "Outlier"
+Score: -0.5  (mildly deceptive)
+--------------------------------------------------------------------------------
+What: DC was dropped from Visualization 1 with the stated reason that it's
+a unique urban environment (no rural counties, no state legislature, no
+comparable geography). That reasoning isn't totally wrong — DC is genuinely
+anomalous in many ways. But the actual effect of removing it is that a data
+point where access is at its maximum (0% of counties without a clinic) and the
+rate is very high (~26 abortions per 1,000 women) gets silently excluded. If DC
+were included, it would sit in the upper-left corner of the scatterplot and
+noticeably reduce the slope of the regression line. Keeping DC would have made
+the chart less visually convincing for the proposition. The "methodological"
+justification was chosen after noticing its visual effect — not before — which
+is what makes this mildly deceptive rather than merely careful.
+
+
+================================================================================
+VISUALIZATION 2: REFUTES THE PROPOSITION
+Title: "Differences in Abortion Rates Across Access Levels Are Nearly Negligible"
+================================================================================
+
+This is a horizontal bar chart where states are collapsed into two coarse access
+categories — High Access (0–49% of counties without a clinic) and Low Access
+(50–100%) — and each bar shows the filtered group mean after selective outlier
+removal. Individual state data points are not shown. ±1 standard-deviation error
+bars extend from each bar end, and numeric mean labels appear in small gray text
+offset past the error bar caps. The x-axis runs from 0 to 100. A bold title and
+muted italic subtitle frame the chart as confirming the "nearly negligible"
+conclusion before the viewer reads any data.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 1 — Coarse, Wide Binning (2 Groups Instead of Continuous Scale)
+Score: -1.5  (mostly deceptive)
+--------------------------------------------------------------------------------
+What: The continuous variable "% of counties without a clinic" (which ranges
+from 0 to 99 and has a clear negative Pearson correlation of r ≈ -0.58 with
+abortion rate) is collapsed into just two buckets: 0–49% (High Access) and
+50–100% (Low Access). This is the central structural deception of Visualization
+2. On a scatterplot the negative trend is visually unmistakable. Folded into two
+blunt bins, the continuous relationship disappears inside the groups. The Low
+Access bucket alone contains roughly 36 states spanning an abortion-rate range of
+approximately 4 to 19 per 1,000 women — enormous within-group variance that makes
+access level appear to predict almost nothing. Using two groups rather than three
+is more aggressive than a three-bin version: the single threshold at 50% throws
+the widest possible net around the high-access states while maximizing heterogen-
+eity in the low-access bucket. An honest alternative would have shown a scatter-
+plot, or at minimum quartile bins that preserve the distribution's structure.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 2 — Extended X-Axis (0 to 100, Data Maximum Is ~29)
+Score: -1.5  (mostly deceptive)
+--------------------------------------------------------------------------------
+What: The X-axis runs from 0 to 100, even though the highest state abortion rate
+in the dataset is about 29. That pushes roughly 70% of the axis into empty white
+space, compressing every visible difference into a narrow strip on the far left.
+After the selective outlier removal in Decisions 6 and 8, the two group means
+land at 14.8 (High Access) and 11.0 (Low Access) — a gap of 3.8 units. On a
+0–30 scale that gap would occupy about 13% of the axis width and look clearly
+meaningful. On a 0–100 scale it occupies less than 4%, and the two bars appear
+almost the same length at a glance. A viewer who wants to compare the groups
+precisely must locate the small gray mean labels, read off both values, and
+subtract — exactly the kind of active effort most readers will not bother with.
+An honest alternative would set the axis limit at or just above the data maximum
+(~30), which is standard practice for bar charts of rates.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 3 — Error Bars Framed as ±1 SD to Suggest Group Overlap
+Score: -1.5  (mostly deceptive)
+--------------------------------------------------------------------------------
+What: Each bar carries error whiskers labeled as ±1 standard deviation. Within
+each group (after outlier removal) the standard deviation is roughly 4–6 units,
+so the whiskers extend far enough that the High Access interval and the Low
+Access interval visually overlap. That overlap creates the impression that the
+two groups are statistically indistinguishable. The impression is false. ±1 SD
+whiskers describe the spread of individual state values around the group mean —
+they say nothing about whether the means themselves differ significantly. The
+statistic relevant to that question is the standard error of the mean (SE =
+σ/√n ≈ 1–2 units), which would produce non-overlapping confidence intervals
+at any conventional significance level and would visually signal a real
+difference. Using SD instead of SE is technically accurate — the bars do show
+what they say they show — but it exploits the common misconception that
+overlapping error bars mean "not significantly different." A chart intended to
+communicate the strength of evidence would use SE or 95% CI whiskers instead.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 4 — Subtle, Low-Contrast Mean Labels
+Score: -0.5  (mildly deceptive)
+--------------------------------------------------------------------------------
+What: The numeric mean values (14.8 for High Access, 11.0 for Low Access) are
+printed in small, light-gray text positioned just past each error bar cap. They
+are technically present — a viewer who reads the chart carefully can find and
+subtract them — but they are deliberately undersized, low-contrast, and placed in
+a peripheral area that the eye skips when scanning the bars. An honest design
+would have printed these values prominently inside or above each bar, or added
+reference lines at the mean positions. By making the labels forgettable, the
+chart prevents casual viewers from doing the arithmetic that would expose the
+actual gap: 14.8 − 11.0 = 3.8 units, which is a 35% relative difference between
+the two group means and clearly visible on an honest 0–30 axis.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 5 — Thin Bars and Muted Color Palette
+Score: -0.5  (mildly deceptive)
+--------------------------------------------------------------------------------
+What: The bars are drawn at height=0.28 (out of a y-range of 2 units), making
+them appear as thin slats rather than solid blocks. Thin bars feel less emphatic
+and visually suggest that the two values are minor and nearly equal, even before
+the viewer reads any numbers. The colors are deliberately desaturated: a muted
+gray-blue (#8FAFC7) for High Access and a muted tan (#C9AA85) for Low Access.
+These are technically distinct but carry no emotional charge and create no
+visual urgency. A chart designed to communicate that a gap is meaningful would
+use thicker bars in strongly contrasting or perceptually salient colors. The
+aesthetic choices here work in the same direction as the extended axis and the
+subtle labels: they systematically de-emphasize the between-group difference at
+every visual level without altering a single data value.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 6 — Asymmetric Outlier Removal From High Access Group
+Score: -2.0  (fully deceptive)
+--------------------------------------------------------------------------------
+What: New Jersey (rate 28.9), New York (27.6), and Washington D.C. (26.1) are
+silently dropped from the chart before plotting — but only from the High Access
+group. The justification offered in the code is that these three are "statistical
+outliers," and there is a kernel of truth in that: NJ and NY do have some of the
+highest abortion rates in the country, and DC is frequently excluded from
+state-level analyses because it is not a state. But the real reason for the
+exclusion is arithmetical: with those three data points in, the High Access mean
+sits at 19.6 per 1,000 women — a large and visible gap above the Low Access
+group. Remove them and the High Access mean drops to 14.8, narrowing the
+apparent difference and making both bars fit unremarkably into the left fifth
+of a 0–100 axis. The criterion was applied only after observing its effect on
+the chart, which is what makes this data manipulation rather than methodology.
+The symmetric outlier removal applied to the Low Access group is documented in
+Decision 8 below.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 7 — Removing Individual State Dots
+Score: -0.5  (mildly deceptive)
+--------------------------------------------------------------------------------
+What: No individual state data points are shown alongside the bars. Overlaying
+raw observations on group summaries is standard practice in modern data visual-
+ization because it lets viewers assess the distribution underlying each mean.
+Here, showing the dots would have immediately revealed three things the chart
+is designed to hide: (a) how few states actually land in High Access after
+removals (~12 states), (b) the wide spread of values within each group that
+makes the mean a poor single-number summary, and (c) the conspicuous absence
+of the removed states — a cluster of dots noticeably missing from the far-right
+end of the High Access group would prompt exactly the question the chart wants
+to avoid. The bare-bar format looks authoritative and makes the selective
+removals in Decisions 6 and 8 effectively invisible to any viewer who does not
+already know to ask.
+
+--------------------------------------------------------------------------------
+DESIGN DECISION 8 — Symmetric-Looking but Opposite Outlier Removal (Low Access)
+Score: -2.0  (fully deceptive)
+--------------------------------------------------------------------------------
+What: Decision 6 removed the highest-rate states from High Access to push its
+mean down. This decision does the mirror image: the five lowest-rate states in
+the Low Access group — South Dakota (4.1), Utah (4.5), Nebraska (5.4), West
+Virginia (5.7), and Iowa (5.9) — are dropped before plotting, raising the Low
+Access mean. The stated justification is that these are "outliers" with unusually
+low rates, symmetric with the outlier removal in Decision 6. It is not. Decision
+6 removed high-end values from High Access (pushing its mean down); Decision 8
+removes low-end values from Low Access (pushing its mean up). Both moves
+compress the gap between the two groups. A genuinely symmetric policy would
+apply the same directional criterion to both groups — remove the top from both,
+or remove the bottom from both. Here the direction flips exactly where it needs
+to in order to serve the argument. The combined effect shrinks the between-group
+gap from roughly 13 units (the raw difference between unmanipulated group means)
+to 3.8 (14.8 − 11.0) — less than 4 units on a 0–100 axis, visually negligible
+at a glance. This is the most structurally complete manipulation in the project:
+two groups, two opposite exclusion rules, both engineered to produce the same
+visual conclusion.
+
+
+================================================================================
+FINAL REFLECTION
+================================================================================
+
+The easy part of this project was making Visualization 1. The data actually
+does show a real negative correlation — r = -0.52 for the occurrence rate,
+r = -0.58 for the residence rate — so I wasn't manufacturing a relationship out
+of nothing. I just had to choose which measurement to use, set the Y-axis floor,
+pick which states to label, and commit to the red palette. Each of those
+decisions took maybe ten minutes to settle on. The hard part was Visualization 2.
+Making a chart look like it shows no pattern when the underlying pattern is
+statistically meaningful (p < 0.0001) took real creative work. My first attempt
+was a scatterplot with no regression line and a deliberately cluttered layout,
+but the dots still traced out a downward trend that anyone could see. The key
+insight was that I needed to break the continuous relationship structurally — not
+just cosmetically — which meant collapsing the data into two coarse bins, then
+adding enough noise (a 0–100 axis, ±1 SD error bars, muted aesthetics) to obscure
+even the categorical difference the binning left behind.
+The most uncomfortable step was the asymmetric outlier removal: dropping NJ, NY,
+and DC from the High Access group to suppress its mean, while removing the lowest-
+rate states from Low Access to raise that mean. Together they shrank the gap from
+roughly 13 units to 3.8 — nearly invisible on a 100-unit axis — but crossing a
+line the other techniques don't quite reach. Everything else in this project is at least
+arguably a framing choice; selectively removing data based on which direction it
+moves your conclusion is straightforwardly data manipulation.
+
+What surprised me most was how much the choice of metric matters. I knew going
+in that "by occurrence" and "by residence" were different measures, but I hadn't
+fully appreciated how different their stories are. In a world where women in
+restricted states regularly cross state lines for care, the occurrence rate is
+basically measuring "where clinics are," not "how many abortions happen to
+residents." Using occurrence rate to argue that restricted states have fewer
+abortions is a bit like measuring crime rates only at police stations and
+concluding that police presence reduces crime. The number is technically
+accurate; the inference it invites is wrong. That particular deception — picking
+a measure that sounds equivalent but isn't — felt more troubling to me than
+truncating the Y-axis, because it's harder for a lay reader to detect and easier
+for a chart-maker to rationalize as a legitimate methodological choice.
+
+Going into this assignment my rough definition of "ethical visualization" was
+something like: don't lie with the data. Show what's there. That definition
+survived about twenty minutes of working on Visualization 1, then fell apart.
+Truncating an axis doesn't lie with the data. Choosing occurrence rate over
+residence rate doesn't lie with the data. Annotating Mississippi and not
+annotating Nevada doesn't lie with the data. Every individual choice is
+defensible in isolation, but together they build something that guides a viewer
+to a conclusion more strongly than the data alone would justify. I think the
+more honest definition is something like: you should be able to disclose every
+design choice in a footnote without being embarrassed by it. Not "is any single
+choice defensible?" but "would I be comfortable if the reader could see exactly
+what I optimized for?" By that standard, Visualization 1 fails pretty clearly —
+the Y-axis floor was picked after I saw how it changed the slope, not before.
+Whether there's a sharp line between persuasive and misleading is something I'm
+genuinely less sure about now than when I started. There probably isn't a line
+so much as a gradient, and most real-world data journalism lives somewhere in the
+middle of it.
