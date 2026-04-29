@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Project 2 Report</title>
+        <style>
+            :root {
+                --color-neutral-95: hsl(220 10% 95%);
+                --color-neutral-90: hsl(220 10% 90%);
+                --color-neutral-80: hsl(220 10% 80%);
+                --color-neutral-70: hsl(220 10% 70%);
+                --color-neutral-60: hsl(220 10% 60%);
+                --color-neutral-50: hsl(220 10% 50%);
+                --color-neutral-40: hsl(220 10% 40%);
+                --color-neutral-30: hsl(220 10% 30%);
+                --color-neutral-20: hsl(220 10% 20%);
+                --color-neutral-10: hsl(220 10% 10%);
+            }
+
+            html {
+                font: 100%/1.5 system-ui;
+                counter-reset: figure;
+                background: var(--color-neutral-95);
+                max-width: min(75vw, 80em);
+                margin: 0 auto;
+            }
+
+            /* Headings */
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                line-height: 1.1;
+                font-weight: 600;
+                text-wrap: balance;
+            }
+
+            h1,
+            h2 {
+                border-bottom: 1px solid var(--color-neutral-80);
+                padding-bottom: 0.2em;
+            }
+
+            h1 {
+                margin-block: 1em 0.5rem;
+                font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
+                font-weight: 800;
+
+                small {
+                    display: block;
+                    width: fit-content;
+                    padding: 0.2em 0.5em;
+                    margin-inline: auto;
+                    color: white;
+                    background: var(--color-neutral-40);
+                    font-size: 40%;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                }
+            }
+
+            h2 {
+                font-size: 180%;
+                color: var(--color-neutral-30);
+            }
+
+            h3 {
+                font-size: 130%;
+            }
+
+            /* Lists */
+
+            ul,
+            ol {
+                padding-inline-start: 2em;
+            }
+
+            li {
+                &::marker {
+                    color: var(--color-neutral-40);
+                }
+
+                + li {
+                    margin-top: 0.2em;
+                }
+            }
+
+            /* Sectioning elements */
+
+            header {
+                padding-block: 1em;
+                text-align: center;
+            }
+
+            main {
+                background: white;
+                color: var(--color-neutral-20);
+                border-radius: 1rem;
+                padding: 0.1rem 2rem;
+            }
+
+            /* Figures */
+
+            figure img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+            }
+
+            figure {
+                margin: 1em 0;
+                padding: 0.5rem;
+                margin-inline: -0.5em;
+                border: 1px solid var(--color-neutral-80);
+                box-shadow: 0 0.1em 0.2em var(--color-neutral-95);
+                text-align: center;
+                background: white;
+
+                > figcaption {
+                    font: 500 75% var(--font-sans);
+                    background: var(--color-neutral-95);
+                    padding: 0.5rem;
+                    margin: -0.5rem;
+                    margin-top: 0.5rem;
+                    counter-increment: figure;
+                    text-align: left;
+
+                    &::before {
+                        content: "Figure " counter(figure) ": ";
+                        font-weight: bold;
+                        color: var(--color-neutral-40);
+                    }
+
+                    a:not(:hover, :focus, :active) {
+                        color: inherit;
+                        text-decoration: underline;
+                        text-decoration-color: color-mix(
+                            in lab,
+                            currentColor,
+                            transparent 70%
+                        );
+                    }
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>
+                <small>Project 2</small>
+                Persuasive or Deceptive Visualization?
+            </h1>
+
+            <p><strong>Group Member's Names: Bruce Nie, Jared Wang, Erdenekhuu Baterdene</strong> </p>
+        </header>
+
+        <main>
+            <h2>Proposition: "Limited access to abortion providers leads to lower abortion rates."</h2>
+
+            <section>
+                <h3>FOR the Proposition</h3>
+
+                <figure>
+                    <img src="supports_proposition.png" alt="Scatterplot of % of counties without an abortion clinic vs. abortion rate per 1,000 women, with a red OLS regression line showing a negative trend." />
+                    <figcaption>
+                        "States With Fewer Providers Show Lower Abortion Rates." Scatterplot of % of counties without an abortion clinic (2020) vs. abortions per 1,000 women aged 15–44 (by state of occurrence, 2020), with a red OLS regression line. Dots are colored white-to-dark-red by restriction level; five states at the extremes are labeled.
+                    </figcaption>
+                </figure>
+
+                <p>Design Decisions and Rationale:</p>
+
+                <ul>
+                    <li>
+                        <strong>Used "by occurrence" rate instead of "by residence" (Score: −2).</strong>
+                        This counts abortions where they happened, not where the patient lives. Women in restricted states often travel out of state for care, so those abortions get counted in the destination state instead. That makes restricted states look like they have way fewer abortions than they actually do. The residence rate would follow the patient and be more accurate, but the occurrence rate made the trend look sharper.
+                    </li>
+                    <li>
+                        <strong>Y-axis starts at 2, not 0 (Score: −1.5).</strong>
+                        Chopping the bottom off the axis makes the regression line look a lot steeper than it really is. Starting at zero would make the slope look much flatter. The easy excuse is "the data starts near 3 anyway," but that's exactly what makes this trick so common.
+                    </li>
+                    <li>
+                        <strong>Red color gradient for restriction level (Score: −1).</strong>
+                        Red reads as "danger" or "warning" before anyone looks at the numbers. It also double-encodes restriction level (once from position on the x-axis, once from color), which pulls extra attention to the high-restriction states piling up in the bottom-right corner.
+                    </li>
+                    <li>
+                        <strong>Only labeled the states that fit the story (Score: −1).</strong>
+                        We labeled Mississippi, Arkansas, New York, New Jersey, and California because they sit at the extreme ends of the trend. States like Nevada and Florida that have high restriction but moderate abortion rates got left as unlabeled dots. All the data is technically visible; we just made it easy to ignore the exceptions.
+                    </li>
+                    <li>
+                        <strong>Dropped D.C. as an "outlier" (Score: −0.5).</strong>
+                        DC has zero counties without a clinic and an abortion rate around 26, so it would land in the upper-left corner and pull the regression line flatter. The reasoning that it is not really a state is not completely wrong, but we noticed the visual effect first and came up with the justification after.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>AGAINST the Proposition</h3>
+
+                <figure>
+                    <img src="refutes_proposition.png" alt="Horizontal bar chart showing two access groups, High Access and Low Access, with nearly equal mean abortion rates and overlapping plus or minus 1 SD error bars on a 0 to 100 axis." />
+                    <figcaption>
+                        "Differences in Abortion Rates Across Access Levels Are Nearly Negligible." Two-group horizontal bar chart (High Access: 0–49% of counties without a clinic; Low Access: 50–100%) showing filtered group means with ±1 SD error bars. X-axis runs 0–100. Abortion rate by state of residence, 2020.
+                    </figcaption>
+                </figure>
+
+                <p>Design Decisions and Rationale:</p>
+
+                <ul>
+                    <li>
+                        <strong>Collapsed everything into just 2 groups (Score: −1.5).</strong>
+                        There is a real correlation between access and abortion rates (r ≈ −0.58), but sorting states into two wide buckets hides it. The Low Access group alone spans rates from 4 to 19, so the within-group variation swallows up the difference between groups.
+                    </li>
+                    <li>
+                        <strong>X-axis goes to 100 when the data tops out at around 29 (Score: −1.5).</strong>
+                        The gap between the two group means is 3.8 units (14.8 vs. 11.0). On a 0 to 30 axis that looks meaningful. On a 0 to 100 axis the two bars are barely distinguishable without actually doing the arithmetic.
+                    </li>
+                    <li>
+                        <strong>Error bars show ±1 SD instead of standard error (Score: −1.5).</strong>
+                        SD bars are wide enough to visually overlap, which makes the groups look like they are basically the same. But SD just describes the spread of individual state values. Standard error bars (roughly 1 to 2 units) would show the groups clearly separated. Using SD takes advantage of the common assumption that overlapping bars mean no real difference.
+                    </li>
+                    <li>
+                        <strong>Mean labels are tiny and easy to miss (Score: −0.5).</strong>
+                        The values 14.8 and 11.0 are printed in small gray text out past the error bar caps. They are technically there, but they are easy to skim past. If they were prominently displayed, the 3.8-unit gap would be pretty hard to dismiss.
+                    </li>
+                    <li>
+                        <strong>Thin bars and washed-out colors (Score: −0.5).</strong>
+                        The bars are narrow on purpose and use a muted gray-blue and tan. Before anyone reads a number, the chart already feels like it is showing two nearly identical values. Thicker bars in stronger colors would make the difference much harder to ignore.
+                    </li>
+                    <li>
+                        <strong>Dropped NJ, NY, and D.C. from the High Access group (Score: −2).</strong>
+                        These three have some of the highest abortion rates in the country. With them included, the High Access mean is 19.6, which is a pretty obvious gap. Removing them brings it down to 14.8. The reasoning that they are outliers or that DC is not a state is not completely false, but we made the call after seeing how much it changed the chart.
+                    </li>
+                    <li>
+                        <strong>No individual state dots shown (Score: −0.5).</strong>
+                        Showing raw data points alongside bars is pretty standard because it lets people see what is actually behind the mean. Leaving them out hides that High Access only has around 12 states after the removals, that values within each group vary a lot, and that certain states are missing entirely.
+                    </li>
+                    <li>
+                        <strong>Dropped the lowest-rate states from Low Access to push its mean up (Score: −2).</strong>
+                        South Dakota (4.1), Utah (4.5), Nebraska (5.4), West Virginia (5.7), and Iowa (5.9) were removed from the Low Access group. That is the mirror image of what we did to High Access, where we removed the high-rate states. Both removals push the two means closer together. Combined, they shrink the gap from around 13 units down to 3.8, which is almost invisible on a 0 to 100 axis.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Final Reflection</h2>
+
+                <p>
+                    Visualization 1 was honestly pretty straightforward. The correlation is real (r ≈ −0.58), so we did not have to invent anything. We just picked the metric that made it look stronger, cut the y-axis, and labeled only the states that fit the story. Each of those felt like a small, reasonable call on its own. Visualization 2 was a lot harder. The pattern is statistically significant (p &lt; 0.0001), so cosmetic changes were not going to be enough. We had to actually break the structure of the data by binning it, stretching the axis, and using SD error bars to make the groups look like they overlap. The part that felt the most wrong was the outlier removal. Dropping the high-rate states from High Access and then dropping the low-rate states from Low Access is technically doing the same thing to both groups, but it is doing it in opposite directions specifically to bring the means together. That is not methodology, that is just picking which data to keep based on what answer you want.
+                </p>
+
+                <p>
+                    We were honestly surprised by how much the choice of metric matters. The occurrence rate and residence rate sound almost identical, but they tell completely different stories once you account for cross-state travel. Occurrence basically tracks where clinics are, not where patients come from. Using it to argue that restricted states have fewer abortions is kind of like only counting crimes that happen inside police stations and concluding that police reduce crime. The number is real but the conclusion it invites is not. That felt harder to spot than a truncated axis, which is probably why it is so common.
+                </p>
+
+                <p>
+                    Going in, our definition of ethical visualization was pretty simple: do not lie with the data. That lasted about twenty minutes. Cutting the y-axis is not lying. Using the occurrence rate is not lying. Labeling Mississippi but not Nevada is not lying. But all of those choices stacked on top of each other push a viewer toward a conclusion more confidently than the data actually supports. A more honest test is whether you would be comfortable writing out every design decision in a footnote. Most of what we did in Visualization 1 would not pass that test. There probably is not a clean line between persuasive and misleading. It is more of a spectrum, and a lot of real charts sit somewhere in the middle of it.
+                </p>
+            </section>
+        </main>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"c822b88e119346678db149ed7b7721c9","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
