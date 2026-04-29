@@ -167,7 +167,7 @@
                 <figure>
                     <img src="supports_proposition.png" alt="Scatterplot of % of counties without an abortion clinic vs. abortion rate per 1,000 women, with a red OLS regression line showing a negative trend." />
                     <figcaption>
-                        "States With Fewer Providers Show Lower Abortion Rates." Scatterplot of % of counties without an abortion clinic (2020) vs. abortions per 1,000 women aged 15–44 (by state of occurrence, 2020), with a red OLS regression line. Dots are colored white-to-dark-red by restriction level; five states at the extremes are labeled.
+                        "States With Fewer Abortion Providers Show Lower Abortion Rates." Scatterplot of % of counties without an abortion clinic (2020) vs. abortions per 1,000 women aged 15–44 (by state of occurrence, 2020), with a red OLS regression line. Dots are colored white-to-dark-red by restriction level; five states at the extremes are labeled.
                     </figcaption>
                 </figure>
 
@@ -180,19 +180,19 @@
                     </li>
                     <li>
                         <strong>Y-axis starts at 2, not 0 (Score: −1.5).</strong>
-                        Chopping the bottom off the axis makes the regression line look a lot steeper than it really is. Starting at zero would make the slope look much flatter. The easy excuse is "the data starts near 3 anyway," but that's exactly what makes this trick so common.
+                        Chopping the bottom off the axis makes the regression line look a lot steeper than it really is, as starting the scale at zero ended up making the slope look much flatter. Doing so, we aimed to strengthen the visual correlation of our proposition.
                     </li>
                     <li>
                         <strong>Red color gradient for restriction level (Score: −1).</strong>
-                        Red reads as "danger" or "warning" before anyone looks at the numbers. It also double-encodes restriction level (once from position on the x-axis, once from color), which pulls extra attention to the high-restriction states piling up in the bottom-right corner.
+                        The shading of red aims to pull the readers attention towards the bottom right (where the darked poitns are concentrated) following the slope downwards. In addition to this, it also draws attention towards the area of high concentration, where high restriction, low abortion points were densely concentrated.
                     </li>
                     <li>
                         <strong>Only labeled the states that fit the story (Score: −1).</strong>
-                        We labeled Mississippi, Arkansas, New York, New Jersey, and California because they sit at the extreme ends of the trend. States like Nevada and Florida that have high restriction but moderate abortion rates got left as unlabeled dots. All the data is technically visible; we just made it easy to ignore the exceptions.
+                        We labeled Mississippi, Arkansas, New York, New Jersey, and California because they sit at the extreme ends of the trend. States like Nevada and Florida that have high restriction but moderate abortion rates got left as unlabeled dots. All the data is technically visible; we aimed to make it easier to ignore the exceptions.
                     </li>
                     <li>
                         <strong>Dropped D.C. as an "outlier" (Score: −0.5).</strong>
-                        DC has zero counties without a clinic and an abortion rate around 26, so it would land in the upper-left corner and pull the regression line flatter. The reasoning that it is not really a state is not completely wrong, but we noticed the visual effect first and came up with the justification after.
+                        DC ends up as an upper‑left outlier because it has zero counties without a clinic and an abortion rate around 26, and as such, would pull the regression line flatter. Ultimately, we decided to use the fact that it could be argued that D.C. was not a state as justification for removing the point.
                     </li>
                 </ul>
             </section>
@@ -212,36 +212,26 @@
                 <ul>
                     <li>
                         <strong>Collapsed everything into just 2 groups (Score: −1.5).</strong>
-                        There is a real correlation between access and abortion rates (r ≈ −0.58), but sorting states into two wide buckets hides it. The Low Access group alone spans rates from 4 to 19, so the within-group variation swallows up the difference between groups.
+                        We saw a relationship (of r \approx -0.05), but decided to group the data into these two categories to hide that. As such, and using bar plots, we aimed to let readers interpret the difference, and with the inclusion of the whiskers, the lengths seemed to be relatively similar.
                     </li>
                     <li>
                         <strong>X-axis goes to 100 when the data tops out at around 29 (Score: −1.5).</strong>
-                        The gap between the two group means is 3.8 units (14.8 vs. 11.0). On a 0 to 30 axis that looks meaningful. On a 0 to 100 axis the two bars are barely distinguishable without actually doing the arithmetic.
+                        The gap between the two group means is 3.8 units (14.8 vs. 11.0). On a 0 to 30 axis that looks meaningful, however, on a 0 to 100 axis the two bars are barely distinguishable visually.
                     </li>
                     <li>
                         <strong>Error bars show ±1 SD instead of standard error (Score: −1.5).</strong>
-                        SD bars are wide enough to visually overlap, which makes the groups look like they are basically the same. But SD just describes the spread of individual state values. Standard error bars (roughly 1 to 2 units) would show the groups clearly separated. Using SD takes advantage of the common assumption that overlapping bars mean no real difference.
-                    </li>
-                    <li>
-                        <strong>Mean labels are tiny and easy to miss (Score: −0.5).</strong>
-                        The values 14.8 and 11.0 are printed in small gray text out past the error bar caps. They are technically there, but they are easy to skim past. If they were prominently displayed, the 3.8-unit gap would be pretty hard to dismiss.
+                        SD bars are wide enough to visually overlap, which makes the groups look like they are basically the same. But SD just describes the spread of individual state values. Standard error bars (roughly 1 to 2 units) would show the groups clearly separated. Using SD takes advantage of the similarly lengthed whiskers, aiming to convince the viewer that there is no real difference. We had initially considered the use of box-plots, as they contained whiskers, however, the difference in positions created a more obvious difference between the two groups, and as such, settled with the use of a bar chart, where only the difference in length was prevalent.
                     </li>
                     <li>
                         <strong>Thin bars and washed-out colors (Score: −0.5).</strong>
-                        The bars are narrow on purpose and use a muted gray-blue and tan. Before anyone reads a number, the chart already feels like it is showing two nearly identical values. Thicker bars in stronger colors would make the difference much harder to ignore.
+                        The bars are narrow on purpose and use a muted gray-blue and tan. Before anyone reads a number, the chart already feels like it is showing two nearly identical values. Having started with thicker bars and stronger colors, it made the difference stand out more to us visually.
                     </li>
                     <li>
-                        <strong>Dropped NJ, NY, and D.C. from the High Access group (Score: −2).</strong>
+                        <strong>Dropped NJ, NY, and D.C. from the High Access group; Dropped the lowest-rate states from Low Access to push its mean up (Score: −2).</strong>
                         These three have some of the highest abortion rates in the country. With them included, the High Access mean is 19.6, which is a pretty obvious gap. Removing them brings it down to 14.8. The reasoning that they are outliers or that DC is not a state is not completely false, but we made the call after seeing how much it changed the chart.
+                        Conversely, South Dakota (4.1), Utah (4.5), Nebraska (5.4), West Virginia (5.7), and Iowa (5.9) were removed from the Low Access group, done so under the notion that they were "outliers" for our low access group, the opposite of what we did to High Access, where we removed the high-rate states. Both removals push the two means closer together and shrink the gap from around 13 units down to 3.8, which is almost invisible on a 0 to 100 axis.
                     </li>
                     <li>
-                        <strong>No individual state dots shown (Score: −0.5).</strong>
-                        Showing raw data points alongside bars is pretty standard because it lets people see what is actually behind the mean. Leaving them out hides that High Access only has around 12 states after the removals, that values within each group vary a lot, and that certain states are missing entirely.
-                    </li>
-                    <li>
-                        <strong>Dropped the lowest-rate states from Low Access to push its mean up (Score: −2).</strong>
-                        South Dakota (4.1), Utah (4.5), Nebraska (5.4), West Virginia (5.7), and Iowa (5.9) were removed from the Low Access group. That is the mirror image of what we did to High Access, where we removed the high-rate states. Both removals push the two means closer together. Combined, they shrink the gap from around 13 units down to 3.8, which is almost invisible on a 0 to 100 axis.
-                    </li>
                 </ul>
             </section>
 
@@ -249,15 +239,15 @@
                 <h2>Final Reflection</h2>
 
                 <p>
-                    Visualization 1 was honestly pretty straightforward. The correlation is real (r ≈ −0.58), so we did not have to invent anything. We just picked the metric that made it look stronger, cut the y-axis, and labeled only the states that fit the story. Each of those felt like a small, reasonable call on its own. Visualization 2 was a lot harder. The pattern is statistically significant (p &lt; 0.0001), so cosmetic changes were not going to be enough. We had to actually break the structure of the data by binning it, stretching the axis, and using SD error bars to make the groups look like they overlap. The part that felt the most wrong was the outlier removal. Dropping the high-rate states from High Access and then dropping the low-rate states from Low Access is technically doing the same thing to both groups, but it is doing it in opposite directions specifically to bring the means together. That is not methodology, that is just picking which data to keep based on what answer you want.
+                    Visualization 1 was pretty straightforward. The correlation is real (r ≈ −0.58), so we wimply had to pick the metrics that would make our visualization look stronger. To do so, we cut the y-axis, and labeled only the states that fit the proposal we were trying to convey. Visualization 2 was a lot harder. The pattern is statistically significant (p < 0.0001), so cosmetic changes were not going to be enough. We had to actually break the structure of the data by binning it, stretching the axis, and using SD error bars to make the groups look like they overlap. The most ethically questionable action was dropping outliers. Dropping the high-rate states from High Access and then dropping the low-rate states from Low Access is technically doing the same thing to both groups, but it is doing it in opposite directions specifically to bring the means together. Doing so, we essentially just kept the data that we wanted under the pretense of cleaning "outliers" from our data.
                 </p>
 
                 <p>
-                    We were honestly surprised by how much the choice of metric matters. The occurrence rate and residence rate sound almost identical, but they tell completely different stories once you account for cross-state travel. Occurrence basically tracks where clinics are, not where patients come from. Using it to argue that restricted states have fewer abortions is kind of like only counting crimes that happen inside police stations and concluding that police reduce crime. The number is real but the conclusion it invites is not. That felt harder to spot than a truncated axis, which is probably why it is so common.
-                </p>
+                    We were honestly surprised by how much the choice of metric matters. The occurrence rate and residence rate sound almost identical, however, they tell completely different stories when accounting for cross-state travel. Occurrence basically tracks where clinics are, not where patients come from, so our using of it to argue that restricted states have fewer abortions is likely to draw false conclusions. However, doing so made it harder to spot the difference compared to that of a truncated axis.
 
                 <p>
-                    Going in, our definition of ethical visualization was pretty simple: do not lie with the data. That lasted about twenty minutes. Cutting the y-axis is not lying. Using the occurrence rate is not lying. Labeling Mississippi but not Nevada is not lying. But all of those choices stacked on top of each other push a viewer toward a conclusion more confidently than the data actually supports. A more honest test is whether you would be comfortable writing out every design decision in a footnote. Most of what we did in Visualization 1 would not pass that test. There probably is not a clean line between persuasive and misleading. It is more of a spectrum, and a lot of real charts sit somewhere in the middle of it.
+                    
+Our initial definition of ethical data visualization was pretty simple: don't lie with the data. However, as we started to plot our visualizations, we realized that it was quite difficult to show two opposing sides with simply the raw data. As such, we employed tactics, such as labeling specific points, cutting the y-axis, or dropping outliers, to try and sell two different perspectives. Now, we would like to say that our view on "ethical visualization" is the same, but it is difficult to pinpoint exactly where the difference between "misleading" and "persuasive" stands. While we do believe there to be cases where a choice is deliberately "misleading", the difference likely stems from whether or not the rational is convincing enough to a reader, meaning that it could be influenced by how that decision was presented and rationalized, and not just the decision itself.
                 </p>
             </section>
         </main>
